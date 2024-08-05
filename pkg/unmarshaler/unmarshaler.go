@@ -14,6 +14,7 @@ var (
 	supportLoki   = false
 	supportMimir  = false
 	supportThanos = false
+	supportVMalert = false
 )
 
 func SupportLoki(support bool) {
@@ -26,6 +27,10 @@ func SupportMimir(support bool) {
 
 func SupportThanos(support bool) {
 	supportThanos = support
+}
+
+func SupportVMalert(support bool) {
+	supportVMalert = support
 }
 
 type RulesFile struct {
@@ -92,6 +97,9 @@ type RuleGroup struct {
 	SourceTenants []string `yaml:"source_tenants"`
 	// Loki only
 	RWConfigs []loki.RemoteWriteConfig `yaml:"remote_write"`
+
+        // VMAlert only
+        Concurrency int `yaml:"concurrency"`
 }
 
 func (r *RuleGroup) knownFields() []string {
@@ -104,6 +112,9 @@ func (r *RuleGroup) knownFields() []string {
 	}
 	if !supportMimir {
 		ignoredFileds = append(ignoredFileds, "source_tenants")
+	}
+	if !supportVMalert {
+		ignoredFileds = append(ignoredFileds, "concurrency")
 	}
 	return mustListStructYamlFieldNames(r, ignoredFileds)
 }
