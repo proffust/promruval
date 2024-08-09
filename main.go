@@ -41,7 +41,7 @@ var (
 	supportLoki            = validateCmd.Flag("support-loki", "Support Loki rules format.").Bool()
 	supportMimir           = validateCmd.Flag("support-mimir", "Support Mimir rules format.").Bool()
 	supportThanos          = validateCmd.Flag("support-thanos", "Support Thanos rules format.").Bool()
-	supportVMalert         = validateCmd.Flag("support-vmalert", "Support Thanos rules format.").Bool()
+	supportVMalert         = validateCmd.Flag("support-vmalert", "Support VMAlert rules format.").Bool()
 
 	docsCmd          = app.Command("validation-docs", "Print human readable form of the validation rules from config file.")
 	docsOutputFormat = docsCmd.Flag("output", "Format of the output.").Short('o').PlaceHolder("[text,markdown,html]").Default("text").Enum("text", "markdown", "html")
